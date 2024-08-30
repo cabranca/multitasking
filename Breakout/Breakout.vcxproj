@@ -87,20 +87,20 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Users\joaqu\Desktop\Repo\C++\CabrankEngine\Breakout\include;C:\Users\joaqu\Desktop\Repo\C++\CabrankEngine\CabrankEngine\include;C:\Users\joaqu\Desktop\Repo\C++\CabrankEngine\CabrankEngine\libraries\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\joaqu\Desktop\Repo\C++\CabrankEngine\x64\Release;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)\Breakout\include;$(SolutionDir)\CabrankEngine\include;$(SolutionDir)\CabrankEngine\libraries\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\x64\Release;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>C:\Users\joaqu\Desktop\Repo\C++\CabrankEngine\Breakout\include;C:\Users\joaqu\Desktop\Repo\C++\CabrankEngine\CabrankEngine\include;C:\Users\joaqu\Desktop\Repo\C++\CabrankEngine\CabrankEngine\libraries\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\joaqu\Desktop\Repo\C++\CabrankEngine\x64\Release;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)\Breakout\include;$(SolutionDir)\CabrankEngine\include;$(SolutionDir)\CabrankEngine\libraries\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\x64\Release;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\Users\joaqu\Desktop\Repo\C++\CabrankEngine\Breakout\include;C:\Users\joaqu\Desktop\Repo\C++\CabrankEngine\CabrankEngine\include;C:\Users\joaqu\Desktop\Repo\C++\CabrankEngine\CabrankEngine\libraries\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\joaqu\Desktop\Repo\C++\CabrankEngine\x64\Release;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)\Breakout\include;$(SolutionDir)\CabrankEngine\include;$(SolutionDir)\CabrankEngine\libraries\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\x64\Release;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>C:\Users\joaqu\Desktop\Repo\C++\CabrankEngine\Breakout\include;C:\Users\joaqu\Desktop\Repo\C++\CabrankEngine\CabrankEngine\include;C:\Users\joaqu\Desktop\Repo\C++\CabrankEngine\CabrankEngine\libraries\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\joaqu\Desktop\Repo\C++\CabrankEngine\x64\Release;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)\Breakout\include;$(SolutionDir)\CabrankEngine\include;$(SolutionDir)\CabrankEngine\libraries\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\x64\Release;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
