@@ -1,6 +1,6 @@
 workspace "Cabrankengine"
     architecture "x64"
-    startproject "Sandbox"
+    startproject "Multitasking"
 
     configurations {"Debug", "Release"}
 
@@ -71,6 +71,54 @@ project "Cabrankengine"
 
 project "Sandbox"
     location "Sandbox"
+    kind "ConsoleApp"
+    language "C++"
+    cppdialect "C++20"
+    staticruntime "on"
+
+    targetdir("bin/" .. outputdir .. "/%{prj.name}")
+    objdir("bin-int/" .. outputdir .. "/%{prj.name}")
+
+    files {"%{prj.name}/src/**.h", "%{prj.name}/src/**.cpp"}
+    includedirs {"Cabrankengine/vendor/spdlog/include", "Cabrankengine/src", "%{IncludeDir.glm}", "%{IncludeDir.ImGui}", "%{IncludeDir.irrKlang}"}
+    links {"Cabrankengine", "GLFW", "glad", "ImGui"}
+
+    filter "system:windows"
+        systemversion "latest"
+        buildoptions { "/utf-8" }
+
+        postbuildcommands 
+        {
+            'xcopy /Y /Q /E /I "%{wks.location}\\Cabrankengine\\vendor\\irrKlang\\dll\\*" "%{cfg.targetdir}"',
+            'xcopy /Y /Q /E /I "%{prj.location}\\assets" "%{cfg.targetdir}\\assets"'
+        }
+
+    filter "system:linux"
+        systemversion "latest"
+        pic "on"
+
+        libdirs { "%{wks.location}/Cabrankengine/vendor/irrKlang/so" }
+        links { "IrrKlang" }
+        links { "X11", "Xrandr", "Xi", "Xxf86vm", "Xcursor", "pthread", "dl", "GL" }
+        linkoptions { "-Wl,-rpath,'$$ORIGIN'" }
+        postbuildcommands 
+        {
+            'cp -ru %{wks.location}/Cabrankengine/vendor/irrKlang/so/* %{cfg.targetdir}/',
+            'cp -ru %{prj.location}/assets/ %{cfg.targetdir}/assets/'
+        }
+        
+    filter "configurations:Debug"
+        defines "CE_DEBUG"
+        runtime "Debug"
+        symbols "on"
+
+    filter "configurations:Release"
+        defines "CE_RELEASE"
+        runtime "Release"
+        optimize "on"
+
+project "Multitasking"
+    location "Multitasking"
     kind "ConsoleApp"
     language "C++"
     cppdialect "C++20"
