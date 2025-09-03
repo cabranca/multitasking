@@ -7,7 +7,7 @@ using namespace cabrankengine;
 
 namespace multitasking {
 
-	GameManager::GameManager(std::array<CounterMinigame*, 2> minigames) : m_CurrentTabIndex(0), m_minigames(std::move(minigames)) {
+	GameManager::GameManager(std::array<Minigame*, 2> minigames) : m_CurrentTabIndex(0), m_minigames(std::move(minigames)) {
 		m_minigames[m_CurrentTabIndex]->setActive(true);
 	}
 

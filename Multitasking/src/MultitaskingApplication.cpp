@@ -4,6 +4,7 @@
 
 #include <Cabrankengine/Core/EntryPoint.h>
 
+#include "BalloonMinigame.h"
 #include "CounterMinigame.h"
 #include "GameManager.h"
 
@@ -14,13 +15,13 @@ namespace multitasking {
 			MultitaskingApplication() {
 				m_minigames[0] = new CounterMinigame();
 				pushLayer(m_minigames[0]);
-				m_minigames[1] = new CounterMinigame();
+				m_minigames[1] = new BalloonMinigame();
 				pushLayer(m_minigames[1]);
 				pushLayer(new GameManager(m_minigames));
 			}
 
 		private:
-			std::array<CounterMinigame*, 2> m_minigames;
+			std::array<Minigame*, 2> m_minigames;
 	};
 }
 
