@@ -23,5 +23,9 @@ namespace multitasking {
 		};
 
 		Balloon m_Balloon;
+
+		float c_Gravity = -10.f;
+		float c_FallVelocity = -1.f;
+		float c_HitForce = 10.f;
 	};
 }

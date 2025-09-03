@@ -8,10 +8,6 @@ using namespace cabrankengine;
 
 namespace multitasking {
 
-	float GRAVITY = -10.f;
-	float FALL_VELOCITY = -1.f;
-	float HIT_FORCE = 10.f;
-
 	void BalloonMinigame::onUpdate(Timestep delta) {
 		if (Input::isMouseButtonPressed(Mouse::Button0)) {
 			checkCollision();
@@ -31,15 +27,15 @@ namespace multitasking {
 		vec2 diff(m_Balloon.Position - vec2(mouseX, mouseY));
 		float distance = sqrt(dot(diff, diff));
 		if (distance < m_Balloon.Radius) {
-			m_Balloon.Velocity = normalize(diff) * distance * HIT_FORCE;
+			m_Balloon.Velocity = normalize(diff) * distance * c_HitForce;
 		}
 	}
 
 	void BalloonMinigame::updatePosition(Timestep delta) {
 		if (m_Balloon.Velocity.y > 0.f)
-			m_Balloon.Velocity.y += GRAVITY * delta;
+			m_Balloon.Velocity.y += c_Gravity * delta;
 		else
-			m_Balloon.Velocity.y = FALL_VELOCITY;
+			m_Balloon.Velocity.y = c_FallVelocity;
 
 		m_Balloon.Position += m_Balloon.Velocity * static_cast<float>(delta);
 	}
