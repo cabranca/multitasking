@@ -5,7 +5,7 @@
 #include <Cabrankengine/Core/Layer.h>
 #include <Cabrankengine/Events/KeyEvent.h>
 
-#include "CounterMinigame.h"
+#include "Minigame.h"
 
 
 namespace multitasking {
