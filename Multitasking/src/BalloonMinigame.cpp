@@ -36,10 +36,10 @@ namespace multitasking {
 	}
 
 	void BalloonMinigame::updatePosition(Timestep delta) {
-		if (m_Balloon.Velocity > 0.f)
-			m_Balloon.Velocity += GRAVITY * delta;
+		if (m_Balloon.Velocity.y > 0.f)
+			m_Balloon.Velocity.y += GRAVITY * delta;
 		else
-			m_Balloon.Velocity = FALL_VELOCITY;
+			m_Balloon.Velocity.y = FALL_VELOCITY;
 
 		m_Balloon.Position += m_Balloon.Velocity * static_cast<float>(delta);
 	}
