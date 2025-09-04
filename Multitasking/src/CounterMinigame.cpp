@@ -11,7 +11,7 @@ using namespace cabrankengine;
 namespace multitasking {
 
     void CounterMinigame::onUpdate(cabrankengine::Timestep delta) {
-        if (m_Active)
+        if (!m_Active)
             return;
 
         RenderCommand::setClearColor({ 0.1f, 0.1f, 0.1f, 1.f });
