@@ -6,8 +6,6 @@
 #include <cstdlib>
 #include <random>
 
-#include "Cabrankengine/Core/Logger.h"
-
 constexpr float PI = 3.14159265358979323846f; // Define PI constant if not available
 std::mt19937 rng{ std::random_device{}() };
 std::uniform_real_distribution<float> angleDist(0.0f, 2.0f * PI);
