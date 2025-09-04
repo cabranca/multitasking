@@ -11,7 +11,8 @@ using namespace cabrankengine;
 
 namespace multitasking {
 
-	GameManager::GameManager(std::array<Minigame*, 2> minigames) : m_CurrentTabIndex(0), m_minigames(std::move(minigames)) {
+	GameManager::GameManager(std::array<Minigame*, 3> minigames) :
+	m_CurrentTabIndex(0), m_minigames(minigames) {
 		m_Camera = std::make_shared<OrthographicCameraController>(1600.0f / 900.0f);
 		for (auto game : m_minigames) {
 			game->setCamera(m_Camera);

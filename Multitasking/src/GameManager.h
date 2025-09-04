@@ -13,7 +13,7 @@ namespace multitasking {
 
 	class GameManager : public cabrankengine::Layer {
 		public:
-			GameManager(std::array<Minigame*, 2> minigames);
+			GameManager(std::array<Minigame*, 3> minigames);
 
 			virtual void onUpdate(cabrankengine::Timestep delta) override;
 			virtual void onEvent(cabrankengine::Event& event) override;
@@ -23,7 +23,7 @@ namespace multitasking {
 		private:
 			bool changeTab(cabrankengine::KeyPressedEvent& event);
 
-			std::array<Minigame*, 2> m_minigames;
+			std::array<Minigame*, 3> m_minigames;
 			int m_CurrentTabIndex;
 
 			cabrankengine::Ref<cabrankengine::OrthographicCameraController> m_Camera;

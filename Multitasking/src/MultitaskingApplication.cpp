@@ -6,6 +6,7 @@
 
 #include "BalloonMinigame.h"
 #include "CounterMinigame.h"
+#include "PopcornMinigame.h"
 #include "GameManager.h"
 
 namespace multitasking {
@@ -17,11 +18,13 @@ namespace multitasking {
 				pushLayer(m_minigames[0]);
 				m_minigames[1] = new BalloonMinigame();
 				pushLayer(m_minigames[1]);
+				m_minigames[2] = new PopcornMinigame();
+				pushLayer(m_minigames[2]);
 				pushLayer(new GameManager(m_minigames));
 			}
 
 		private:
-			std::array<Minigame*, 2> m_minigames;
+			std::array<Minigame*, 3> m_minigames;
 	};
 }
 
