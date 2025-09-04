@@ -104,7 +104,7 @@ project "Sandbox"
         postbuildcommands 
         {
             'cp -ru %{wks.location}/Cabrankengine/vendor/irrKlang/so/* %{cfg.targetdir}/',
-            'cp -ru %{prj.location}/assets/ %{cfg.targetdir}/assets/'
+            'cp -ru %{prj.location}/assets/ %{cfg.targetdir}'
         }
         
     filter "configurations:Debug"
@@ -152,7 +152,7 @@ project "Multitasking"
         postbuildcommands 
         {
             'cp -ru %{wks.location}/Cabrankengine/vendor/irrKlang/so/* %{cfg.targetdir}/',
-            'cp -ru %{prj.location}/assets/ %{cfg.targetdir}/assets/'
+            'cp -ru %{prj.location}/assets/ %{cfg.targetdir}'
         }
         
     filter "configurations:Debug"
