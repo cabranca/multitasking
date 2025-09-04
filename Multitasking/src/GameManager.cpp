@@ -1,13 +1,20 @@
 #include "GameManager.h"
 
+#include <memory>
+
 #include <Cabrankengine/Core/Core.h>
 #include<Cabrankengine/Events/KeyEvent.h>
+#include <Cabrankengine/Renderer/OrthographicCameraController.h>
 
 using namespace cabrankengine;
 
 namespace multitasking {
 
 	GameManager::GameManager(std::array<Minigame*, 2> minigames) : m_CurrentTabIndex(0), m_minigames(std::move(minigames)) {
+		m_Camera = std::make_shared<OrthographicCameraController>(1600.0f / 900.0f);
+		for (auto game : m_minigames) {
+			game->setCamera(m_Camera);
+		}
 		m_minigames[m_CurrentTabIndex]->setActive(true);
 	}
 
