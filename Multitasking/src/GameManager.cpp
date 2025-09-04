@@ -3,6 +3,7 @@
 #include <memory>
 
 #include <Cabrankengine/Core/Core.h>
+#include <Cabrankengine/Core/Logger.h>
 #include<Cabrankengine/Events/KeyEvent.h>
 #include <Cabrankengine/Renderer/OrthographicCameraController.h>
 
@@ -14,6 +15,9 @@ namespace multitasking {
 		m_Camera = std::make_shared<OrthographicCameraController>(1600.0f / 900.0f);
 		for (auto game : m_minigames) {
 			game->setCamera(m_Camera);
+			game->setWinLoseCallback([](bool win) {
+				CE_INFO("YOU {0} THE GAME", win ? "WON" : "LOSE");
+				});
 		}
 		m_minigames[m_CurrentTabIndex]->setActive(true);
 	}

@@ -52,8 +52,8 @@ namespace multitasking {
         ImGui::BeginDisabled(m_Counter == m_Goal);
         if (ImGui::Button("QUIERO MÁS")) {
             m_Counter++;
-            if (m_Counter == m_Goal && m_WinCallback)
-                m_WinCallback();
+            if (m_Counter == m_Goal && m_WinLoseCallback)
+                m_WinLoseCallback(true);
         }
         ImGui::EndDisabled();
 

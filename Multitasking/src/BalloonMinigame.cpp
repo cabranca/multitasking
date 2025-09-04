@@ -71,10 +71,12 @@ namespace multitasking {
 
 	void BalloonMinigame::checkCollision() {
 		if (abs(m_Balloon.Position.x) + m_Balloon.Radius > 16.f / 9.f) {
-			CE_INFO("HIT BORDER");
 			m_Balloon.Position.x = clamp(m_Balloon.Position.x, -16.f / 9.f + m_Balloon.Radius, 16.f / 9.f - m_Balloon.Radius);
 			m_Balloon.Velocity.x *= -1.f;
 		}
+
+		if (m_Balloon.Position.y - m_Balloon.Radius < -1.f)
+			m_WinLoseCallback(false);
 	}
 
 	void BalloonMinigame::render() {
