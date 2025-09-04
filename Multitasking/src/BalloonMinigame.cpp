@@ -1,5 +1,7 @@
 #include "BalloonMinigame.h"
 
+#include <imgui.h>
+
 #include <Cabrankengine/Core/Input.h>
 #include <Cabrankengine/Core/Logger.h>
 #include <Cabrankengine/Renderer/RenderCommand.h>
@@ -23,17 +25,28 @@ namespace multitasking {
 		render();
 	}
 
+#ifdef CE_DEBUG
 	void BalloonMinigame::onImGuiRender() {
+		if (!m_Active)
+			return;
+
+		ImGui::Begin("Settings");
+
+		ImGui::InputFloat("Gravity", &c_Gravity);
+		ImGui::InputFloat("Fall Velocity", &c_FallVelocity);
+		ImGui::InputFloat("Hit Force", &c_HitForce);
+		ImGui::InputFloat("Drag", &c_Drag);
+
+		ImGui::End();
 	}
+#else
+	void BalloonMinigame::onImGuiRender() {}
+#endif
 
 	void BalloonMinigame::checkMouseHit() {
 		auto [mouseX, mouseY] = Input::getMousePosition();
 
-		CE_TRACE("Mouse position in Viewport coordinates: [{0}, {1}]", mouseX, mouseY);
-
 		auto mouseNormalCoords = vec2((mouseX - 800.f), (-mouseY + 450.f)) / 450.f;
-
-		CE_TRACE("Mouse Position in normal coordinates: [{0}, {1}]", mouseNormalCoords.x, mouseNormalCoords.y);
 
 		vec2 diff(m_Balloon.Position - mouseNormalCoords);
 		float distance = sqrt(dot(diff, diff));
@@ -57,7 +70,11 @@ namespace multitasking {
 	}
 
 	void BalloonMinigame::checkCollision() {
-
+		if (abs(m_Balloon.Position.x) + m_Balloon.Radius > 16.f / 9.f) {
+			CE_INFO("HIT BORDER");
+			m_Balloon.Position.x = clamp(m_Balloon.Position.x, -16.f / 9.f + m_Balloon.Radius, 16.f / 9.f - m_Balloon.Radius);
+			m_Balloon.Velocity.x *= -1.f;
+		}
 	}
 
 	void BalloonMinigame::render() {
