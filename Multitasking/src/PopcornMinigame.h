@@ -19,7 +19,8 @@ namespace multitasking {
 		virtual void onImGuiRender() override;
 
 	private:
-		void updatePopcorn(cabrankengine::Timestep delta);
+		void updatePopcornPosition(cabrankengine::Timestep delta);
+		void processPopcornCollision();
 		bool checkMouseCollision();
 		void spawnPopcorn(cabrankengine::Timestep delta);
 		void render();
@@ -35,8 +36,9 @@ namespace multitasking {
 			glm::vec2 Position;
 			float Rotation;
 			glm::vec2 Velocity ;
-            float CollisionRadius = 0.1f;
+            float CollisionRadius = 0.05f;
 			glm::vec2 TextureSize = glm::vec2(0.1f);
+			bool isOnGround = false;
 		};
 
 		cabrankengine::Ref<cabrankengine::Texture2D> popcornTexture;

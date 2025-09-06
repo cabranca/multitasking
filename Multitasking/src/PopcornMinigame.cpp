@@ -26,17 +26,36 @@ namespace multitasking {
 		if (m_Active && Input::isMouseButtonPressed(Mouse::Button0) && checkMouseCollision()) {
 			spawnPopcorn(delta);
 		}
-		updatePopcorn(delta);
+		updatePopcornPosition(delta);
+		processPopcornCollision();
 		render();
 	}
 
 	void PopcornMinigame::onImGuiRender() {
 	}
 
-	void PopcornMinigame::updatePopcorn(Timestep delta) {
-		for (int i = 0; i < m_Popcorn.size(); i++) {
-			m_Popcorn[i].Velocity.y += GRAVITY * delta;
-			m_Popcorn[i].Position += m_Popcorn[i].Velocity * static_cast<float>(delta);
+	void PopcornMinigame::updatePopcornPosition(Timestep delta) {
+		for (auto& p : m_Popcorn) {
+			if (!p.isOnGround) {
+				p.Velocity.y += GRAVITY * delta;
+			}
+			p.Position += p.Velocity * static_cast<float>(delta);
+		}
+	}
+
+	void PopcornMinigame::processPopcornCollision() {
+		for (auto& p : m_Popcorn) {
+			// If colliding with left or right wall, bounce back
+			if (abs(p.Position.x) + p.CollisionRadius > 16.f / 9.f) {
+				p.Position.x = clamp(p.Position.x, -16.f / 9.f + p.CollisionRadius, 16.f / 9.f - p.CollisionRadius);
+				p.Velocity.x *= -0.7f;
+			}
+			// If colliding with floor, clamp position and remove velocity
+			if (p.Position.y + p.CollisionRadius < -1.f) {
+				p.Position.y = clamp(p.Position.y, -1.f + p.CollisionRadius, 1.f - p.CollisionRadius);
+				p.Velocity = vec2(0.f);
+				p.isOnGround = true;
+			}
 		}
 	}
 
