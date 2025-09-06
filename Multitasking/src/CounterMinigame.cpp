@@ -2,6 +2,7 @@
 
 #include <imgui.h>
 
+#include <Cabrankengine/Core/AudioEngine.h>
 #include <Cabrankengine/Core/Application.h>
 #include <Cabrankengine/Core/Window.h>
 #include <Cabrankengine/Renderer/RenderCommand.h>
@@ -20,6 +21,9 @@ namespace multitasking {
 
     void CounterMinigame::onImGuiRender() {
         if (!m_Active)
+            return;
+
+        if (m_FinishedGame)
             return;
 
         printCounter();
@@ -85,9 +89,12 @@ namespace multitasking {
 
         ImGui::BeginDisabled(m_Counter == m_Goal);
         if (ImGui::Button("QUIERO MÁS", buttonSize)) {
+            AudioEngine::playAudio("assets/sounds/click.wav", false);
             m_Counter++;
-            if (m_Counter == m_Goal && m_WinLoseCallback)
+            if (m_Counter == m_Goal && m_WinLoseCallback) {
                 m_WinLoseCallback(true);
+                
+            }
         }
         ImGui::EndDisabled();
 

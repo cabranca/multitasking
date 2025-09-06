@@ -2,6 +2,7 @@
 
 #include <imgui.h>
 
+#include <Cabrankengine/Core/AudioEngine.h>
 #include <Cabrankengine/Core/Application.h>
 #include <Cabrankengine/Core/Input.h>
 #include <Cabrankengine/Core/Logger.h>
@@ -57,6 +58,7 @@ namespace multitasking {
 		float distance = sqrt(dot(diff, diff));
 		if (distance < m_Balloon.Radius) {
 			m_Balloon.Velocity = diff * c_HitForce;
+			AudioEngine::playAudio("assets/sounds/balloon.wav", false);
 		}
 	}
 
@@ -80,8 +82,10 @@ namespace multitasking {
 			m_Balloon.Velocity.x *= -1.f;
 		}
 
-		if (m_Balloon.Position.y - m_Balloon.Radius < -1.f)
+		if (m_Balloon.Position.y - m_Balloon.Radius < -1.f) {
 			m_WinLoseCallback(false);
+		}
+			
 	}
 
 	void BalloonMinigame::render() {

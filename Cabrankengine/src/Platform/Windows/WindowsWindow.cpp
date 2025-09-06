@@ -68,7 +68,6 @@ namespace cabrankengine {
 		const GLFWvidmode* mode = glfwGetVideoMode(monitor);
 
 		// Crear ventana borderless
-		glfwWindowHint(GLFW_DECORATED, GLFW_FALSE);  // sin bordes
 		glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);  // opcional: que no se pueda redimensionar
 
 		m_Data.Title = props.Title;
@@ -78,7 +77,8 @@ namespace cabrankengine {
 		{
 			CE_PROFILE_FUNCTION();
 
-			m_Window = glfwCreateWindow(m_Data.Width, m_Data.Height, m_Data.Title.c_str(), nullptr, nullptr);
+			m_Window = glfwCreateWindow(mode->width, mode->height, m_Data.Title.c_str(), nullptr, nullptr);
+			glfwMaximizeWindow(m_Window);
 		}
 
 		m_Context = new OpenGLContext(m_Window);

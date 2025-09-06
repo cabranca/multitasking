@@ -2,6 +2,7 @@
 
 #include <array>
 
+#include <Cabrankengine/Core/AudioEngine.h>
 #include <Cabrankengine/Core/EntryPoint.h>
 
 #include "BalloonMinigame.h"

@@ -1,5 +1,6 @@
 #include "PopcornMinigame.h"
 
+#include <Cabrankengine/Core/AudioEngine.h>
 #include <Cabrankengine/Core/Application.h>
 #include <Cabrankengine/Core/Input.h>
 #include <Cabrankengine/Core/Window.h>
@@ -90,6 +91,7 @@ namespace multitasking {
 		p.Velocity.y = sin(radians(angle)) * speed;
 
 		m_Popcorn.push_back(p);
+		AudioEngine::playAudio("assets/sounds/popcorn.mp3", false);
 	}
 
 	void PopcornMinigame::render() {

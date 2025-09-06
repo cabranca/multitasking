@@ -19,7 +19,8 @@ namespace multitasking {
 			void renderSettings();
 
 			int m_Counter = 0; // Current state of the counter
-			int m_Goal = 100; // Goal to reach incrementing the counter
+			int m_Goal = 1000; // Goal to reach incrementing the counter
+			bool m_Won = false;
 
 			float m_FontScale = 8.f;
 	};

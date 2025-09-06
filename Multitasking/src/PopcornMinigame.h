@@ -26,14 +26,14 @@ namespace multitasking {
 		void render();
 
         struct PopcornMachine {
-            glm::vec2 Position;
+            glm::vec2 Position = glm::vec2(0.f);
 			float Rotation = 0.f;
             float CollisionRadius = 0.4f;
             glm::vec2 TextureSize = glm::vec2(0.4f);
         };
 
 		struct Popcorn {
-			glm::vec2 Position;
+			glm::vec2 Position = glm::vec2(0.f);
 			float Rotation;
 			glm::vec2 Velocity ;
             float CollisionRadius = 0.05f;

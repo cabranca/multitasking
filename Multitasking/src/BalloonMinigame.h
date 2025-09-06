@@ -31,7 +31,7 @@ namespace multitasking {
 		Balloon m_Balloon;
 
 		float c_Gravity = -10.f;
-		float c_FallVelocity = -0.1f;
+		float c_FallVelocity = -0.15f;
 		float c_HitForce = 15.f;
 		float c_Drag = 4.f; // coeficiente (0 = sin resistencia, 1 = se frena instantáneo)
 	};

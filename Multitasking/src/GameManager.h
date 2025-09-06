@@ -16,6 +16,7 @@ namespace multitasking {
 			GameManager(std::array<Minigame*, 3> minigames);
 
 			virtual void onUpdate(cabrankengine::Timestep delta) override;
+			virtual void onImGuiRender() override;
 			virtual void onEvent(cabrankengine::Event& event) override;
 
 			cabrankengine::OrthographicCamera& getCamera() { return m_Camera->getCamera(); }
@@ -27,5 +28,8 @@ namespace multitasking {
 			int m_CurrentTabIndex;
 
 			cabrankengine::Ref<cabrankengine::OrthographicCameraController> m_Camera;
+
+			float m_FontScale = 10.f;
+			std::string m_FinalMessage = "";
 	};
 }
