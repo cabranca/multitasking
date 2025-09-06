@@ -9,8 +9,8 @@
 constexpr float PI = 3.14159265358979323846f; // Define PI constant if not available
 std::mt19937 rng{ std::random_device{}() };
 std::uniform_real_distribution<float> angleDist(0.0f, 2.0f * PI);
-std::uniform_real_distribution<float> popcornAngleDist(70.0f, 110.0f);
-std::uniform_real_distribution<float> popcornSpeedDist(3.0f, 5.0f);
+std::uniform_real_distribution<float> popcornAngleDist(60.0f, 120.0f);
+std::uniform_real_distribution<float> popcornSpeedDist(3.0f, 6.0f);
 
 using namespace glm;
 using namespace cabrankengine;
