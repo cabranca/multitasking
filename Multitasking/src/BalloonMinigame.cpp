@@ -2,8 +2,10 @@
 
 #include <imgui.h>
 
+#include <Cabrankengine/Core/Application.h>
 #include <Cabrankengine/Core/Input.h>
 #include <Cabrankengine/Core/Logger.h>
+#include <Cabrankengine/Core/Window.h>
 #include <Cabrankengine/Renderer/RenderCommand.h>
 #include <Cabrankengine/Renderer/Renderer2D.h>
 
@@ -17,7 +19,7 @@ namespace multitasking {
 	}
 
 	void BalloonMinigame::onUpdate(Timestep delta) {
-		if (Input::isMouseButtonPressed(Mouse::Button0)) {
+		if (m_Active && Input::isMouseButtonPressed(Mouse::Button0)) {
 			checkMouseHit();
 		}
 		updatePosition(delta);
@@ -44,9 +46,12 @@ namespace multitasking {
 #endif
 
 	void BalloonMinigame::checkMouseHit() {
+		auto& window = Application::get().getWindow();
+		float windowWidth = (float)window.getWidth();
+		float windowHeight = (float)window.getHeight();
 		auto [mouseX, mouseY] = Input::getMousePosition();
 
-		auto mouseNormalCoords = vec2((mouseX - 1920.f), (-mouseY + 1080.f)) / 1080.f;
+		auto mouseNormalCoords = vec2((mouseX - windowWidth / 2.f), (-mouseY + windowHeight / 2.f)) / (windowHeight / 2.f);
 
 		vec2 diff(m_Balloon.Position - mouseNormalCoords);
 		float distance = sqrt(dot(diff, diff));

@@ -53,10 +53,6 @@ namespace cabrankengine {
 	void WindowsWindow::init(const WindowProps& props) {
 		CE_PROFILE_FUNCTION();
 
-		m_Data.Title = props.Title;
-		m_Data.Width = 3840;
-		m_Data.Height = 2160;
-
 		CE_CORE_INFO("Creating window {0} ({1}, {2})", props.Title, props.Width, props.Height);
 
 		if (!s_GLFWInitialized) {
@@ -68,7 +64,16 @@ namespace cabrankengine {
 			s_GLFWInitialized = true;
 		}
 
+		GLFWmonitor* monitor = glfwGetPrimaryMonitor();
+		const GLFWvidmode* mode = glfwGetVideoMode(monitor);
+
+		// Crear ventana borderless
 		glfwWindowHint(GLFW_DECORATED, GLFW_FALSE);  // sin bordes
+		glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);  // opcional: que no se pueda redimensionar
+
+		m_Data.Title = props.Title;
+		m_Data.Width = mode->width;
+		m_Data.Height = mode->height;
 
 		{
 			CE_PROFILE_FUNCTION();
