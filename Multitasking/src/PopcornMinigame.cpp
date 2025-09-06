@@ -62,8 +62,8 @@ namespace multitasking {
 		float angle = popcornAngleDist(rng);
 		float speed = popcornSpeedDist(rng);
 
-		p.Velocity.x = cos(angle) * speed;
-		p.Velocity.y = sin(angle) * speed;
+		p.Velocity.x = cos(radians(angle)) * speed;
+		p.Velocity.y = sin(radians(angle)) * speed;
 
 		m_Popcorn.push_back(p);
 	}
