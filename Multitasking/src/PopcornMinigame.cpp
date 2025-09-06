@@ -62,7 +62,7 @@ namespace multitasking {
 	bool PopcornMinigame::checkMouseCollision() {
 		auto [mouseX, mouseY] = Input::getMousePosition();
 
-		auto mouseNormalCoords = vec2((mouseX - 800.f), (-mouseY + 450.f)) / 450.f;
+		auto mouseNormalCoords = vec2((mouseX - 1920.f), (-mouseY + 1080.f)) / 1080.f;
 
 		vec2 diff(m_PopcornMachine.Position - mouseNormalCoords);
 		float distance = sqrt(dot(diff, diff));

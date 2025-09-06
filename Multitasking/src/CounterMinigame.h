@@ -20,5 +20,7 @@ namespace multitasking {
 
 			int m_Counter = 0; // Current state of the counter
 			int m_Goal = 100; // Goal to reach incrementing the counter
+
+			float m_FontScale = 8.f;
 	};
 }

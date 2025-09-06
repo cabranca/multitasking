@@ -28,17 +28,48 @@ namespace multitasking {
 	}
 
     void CounterMinigame::printCounter() const {
-        auto windowWidth = Application::get().getWindow().getWidth();
-        std::string counterStr = std::string("Counter: ") + std::to_string(m_Counter);
+        auto& window = Application::get().getWindow();
+        float windowWidth = (float)window.getWidth();
+        float windowHeight = (float)window.getHeight();
 
-        ImVec2 pos = ImGui::GetWindowPos();
-        ImGui::GetForegroundDrawList()->AddText(ImVec2(pos.x + windowWidth / 2, pos.y + 10.f), IM_COL32_WHITE, counterStr.c_str());
+        std::string counterStr = "Counter: " + std::to_string(m_Counter);
+
+        // calcular tamaño del texto con la fuente actual
+        ImFont* font = ImGui::GetFont();
+        ImVec2 textSize = font->CalcTextSizeA(font->LegacySize * m_FontScale, FLT_MAX, 0.0f, counterStr.c_str());
+
+        // centrar en pantalla
+        ImVec2 pos(
+            (windowWidth - textSize.x) * 0.5f,
+            (windowHeight - textSize.y) * 0.5f
+        );
+
+        // dibujar texto
+        ImGui::GetForegroundDrawList()->AddText(
+            font,
+            font->LegacySize * m_FontScale,
+            pos,
+            IM_COL32_WHITE,
+            counterStr.c_str()
+        );
     }
 
     void CounterMinigame::drawButton() {
-        auto windowWidth = Application::get().getWindow().getWidth();
-        ImVec2 pos = ImGui::GetWindowPos();
-        ImGui::SetNextWindowPos(ImVec2(pos.x + windowWidth / 2, pos.y + 50.f), ImGuiCond_Always, ImVec2(0.5f, 0.5f)); // pos absoluta
+        auto& window = Application::get().getWindow();
+        float windowWidth = (float)window.getWidth();
+        float windowHeight = (float)window.getHeight();
+
+        // Escala del botón (ej: 2x más grande)
+        float scale = 2.0f;
+        ImVec2 buttonSize(120.0f * scale, 40.0f * scale); // tamaño base * escala
+
+        // Centrar el botón en pantalla
+        ImVec2 pos(
+            (windowWidth - buttonSize.x) * 0.5f,
+            (windowHeight - buttonSize.y) * 0.5f + 100.0f // desplazamiento vertical extra si querés
+        );
+
+        ImGui::SetNextWindowPos(pos, ImGuiCond_Always);
         ImGui::SetNextWindowBgAlpha(0.0f); // fondo transparente
 
         ImGuiWindowFlags flags =
@@ -49,8 +80,11 @@ namespace multitasking {
 
         ImGui::Begin("CounterButtonWindow", nullptr, flags);
 
+        // Escalar fuente dentro de esta ventana
+        ImGui::SetWindowFontScale(scale);
+
         ImGui::BeginDisabled(m_Counter == m_Goal);
-        if (ImGui::Button("QUIERO MÁS")) {
+        if (ImGui::Button("QUIERO MÁS", buttonSize)) {
             m_Counter++;
             if (m_Counter == m_Goal && m_WinLoseCallback)
                 m_WinLoseCallback(true);
@@ -66,6 +100,7 @@ namespace multitasking {
 
         ImGui::InputInt("Counter", &m_Counter);
         ImGui::InputInt("Goal", &m_Goal);
+        ImGui::InputFloat("Font Scale", &m_FontScale);
 
         ImGui::End();
     }

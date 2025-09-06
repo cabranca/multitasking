@@ -54,8 +54,8 @@ namespace cabrankengine {
 		CE_PROFILE_FUNCTION();
 
 		m_Data.Title = props.Title;
-		m_Data.Width = props.Width;
-		m_Data.Height = props.Height;
+		m_Data.Width = 3840;
+		m_Data.Height = 2160;
 
 		CE_CORE_INFO("Creating window {0} ({1}, {2})", props.Title, props.Width, props.Height);
 
@@ -68,10 +68,12 @@ namespace cabrankengine {
 			s_GLFWInitialized = true;
 		}
 
+		glfwWindowHint(GLFW_DECORATED, GLFW_FALSE);  // sin bordes
+
 		{
 			CE_PROFILE_FUNCTION();
 
-			m_Window = glfwCreateWindow(props.Width, props.Height, m_Data.Title.c_str(), nullptr, nullptr);
+			m_Window = glfwCreateWindow(m_Data.Width, m_Data.Height, m_Data.Title.c_str(), nullptr, nullptr);
 		}
 
 		m_Context = new OpenGLContext(m_Window);
